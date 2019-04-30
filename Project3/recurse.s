@@ -19,10 +19,10 @@ factorial:
     mul		r2, r2, r4			# n * factorial(n-1)
     br		factorial_out		        # can't just ret, need to deallocate
 
-  base_case:
-	movi	r2, 1				# if (n == 1) return 1
-  factorial_out:
-	mov     sp, fp				# deallocate our stack
+ base_case:
+    movi	r2, 1				# if (n == 1) return 
+ factorial_out:
+    mov         sp, fp				# deallocate our stack
     ldw		ra, 4(sp)			# restore ra
     ldw		fp, 0(sp)			# restore fp
     addi	sp, sp, 8			# deallocate ra/fp space
