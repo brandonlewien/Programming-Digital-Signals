@@ -1,0 +1,6 @@
+Part 2.1:
+#Brandon L A+
+
+Part 2.2:
+STUDENT_NAME_LEN:   .word   0x10
+STUDENT_NAME:       .ascii "x42\x72\x61\x6e\x64\x4f\x6e\xf8\x0\x0\xcc\x0\x0\x0\x0\x0"
