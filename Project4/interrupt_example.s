@@ -8,37 +8,37 @@ _start:
 
 	movia	r16, TIMER_BASE		# interval timer base address
 	/* set the interval timer period for scrolling the HEX displays */
-	movia	r13, SPEED		    # 1/(100 MHz) x (5 x 10^6) = 50 msec
+	movia	r13, SPEED		# 1/(100 MHz) x (5 x 10^6) = 50 msec
 	ldw     r12, 0(r13)
-	sthio	r12, 8(r16)			# store the low half word of counter start value
+	sthio	r12, 8(r16)		# store the low half word of counter start value
 	srli	r12, r12, 16
 	sthio	r12, 0xC(r16)		# high half word of counter start value
 
 	/* start interval timer, enable its interrupts */
-	movi	r15, 0b0111			# START = 1, CONT = 1, ITO = 1
+	movi	r15, 0b0111		# START = 1, CONT = 1, ITO = 1
 	sthio	r15, 4(r16)
 
 	/* write to the pushbutton port interrupt mask register */
 	movia	r15, KEY_BASE		# pushbutton key base address
-	movi	r7, 0b11			# set interrupt mask bits
-	stwio	r7, 8(r15)			# interrupt mask register is (base + 8)
+	movi	r7, 0b11		# set interrupt mask bits
+	stwio	r7, 8(r15)		# interrupt mask register is (base + 8)
 
 	/* enable Nios II processor interrupts */
 	movia	r7, 0x00000001		# get interrupt mask bit for interval timer
 	movia	r8, 0x00000002		# get interrupt mask bit for pushbuttons
-	or		r7, r7, r8
-	wrctl	ienable, r7			# enable interrupts for the given mask bits
+	or	r7, r7, r8
+	wrctl	ienable, r7		# enable interrupts for the given mask bits
 	movi	r7, 1
 	
-	wrctl	status, r7			# turn on Nios II interrupt processing
+	wrctl	status, r7		# turn on Nios II interrupt processing
 
-	mov		r20, r0
-	mov	 	r21, r0		
+	mov	r20, r0
+	mov	 r21, r0		
 	movia	r21, PATTERN		# set up a pointer to the display pattern
 	movi  	r5, 18		
 	movi 	r6, 0
 IDLE:
-	br		IDLE
+	br	IDLE
 
 .data
 .global	PATTERN
