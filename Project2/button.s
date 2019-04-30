@@ -43,14 +43,14 @@ FORWARD:
 	br      LOOP		            # Otherwise go to loop directly
 BACKWARD:
 	beq     r16, r9, FBACK              # Check if previous state was forward
-	movi    r16, 0					    # Flag setter
+	movi    r16, 0			    # Flag setter
 	ldw     r12, 0(r10)                 # Load new information from r10 to r12
-	slli    r12, r12, 24				# Shift logical left by 24 bits to line up with leftmost edge
+	slli    r12, r12, 24		    # Shift logical left by 24 bits to line up with leftmost edge
 	srli 	r13, r13, 8                 # Shift right 8, useful when loading new things
 	add 	r13, r13, r12               # Add 'catcher' register to output register
-	stwio   r13, (r3)			    	# Display the state on segments
+	stwio   r13, (r3)		    # Display the state on segments
 	addi    r10, r10, 4                 # Shift register by 4
-	call 	DELAY						# Call to Delay above, will return here
+	call 	DELAY			    # Call to Delay above, will return here
 	movui   r23, 0x0                    # Reset counter register within delay
 	beq     r13, r20, SKIPQUEUE         # Branch if 0x00000000 for reset purposes
 	br	LOOP                        # Otherwise go to loop directly
