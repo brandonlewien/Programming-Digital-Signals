@@ -14,5 +14,4 @@ LOOP:
 	add     r8,  r10,  r9   # Adder 
 	stwio	r8, (r2)	# Display the state on LEDs
 	br	LOOP
-
-	.end
+.end
